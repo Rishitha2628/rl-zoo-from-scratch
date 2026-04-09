@@ -1,4 +1,4 @@
-# rl-fundamentals
+# rl-zoo-from-scratch
 
 A clean, readable implementation of core reinforcement learning algorithms in Python using [Gymnasium](https://gymnasium.farama.org/). Built as a learning reference — every file is self-contained, every design choice is commented with *why*, not just *what*.
 
@@ -7,7 +7,7 @@ A clean, readable implementation of core reinforcement learning algorithms in Py
 ## Structure
 
 ```
-rl-fundamentals/
+rl-zoo-from-scratch/
 ├── dynamic_programming/
 │   ├── dp.py                   # Value iteration, Policy iteration
 │   └── plot_results.py
@@ -90,8 +90,8 @@ rl-fundamentals/
 ## Installation
 
 ```bash
-git clone https://github.com/your-username/rl-fundamentals.git
-cd rl-fundamentals
+git clone https://github.com/your-username/rl-zoo-from-scratch.git
+cd rl-zoo-from-scratch
 pip install -r requirements.txt
 ```
 
@@ -168,7 +168,6 @@ Ground truth: `V(328) = 1.62`, `mean V = 2.47`, `max Q = 20.0`
 | SAC | — |
 | DDPG | — |
 
-*Fill in after running `plot_results.py` in each folder.*
 
 ---
 
