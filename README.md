@@ -8,6 +8,11 @@ A clean, readable implementation of core reinforcement learning algorithms in Py
 
 ```
 rl-zoo-from-scratch/
+├── assets/
+│   ├── prediction_results.png
+│   ├── policy_gradient_results.png
+│   ├── lunarlander_ppo.mov
+│   └── sac_halfcheetah.mov
 ├── dynamic_programming/
 │   ├── dp.py                   # Value iteration, Policy iteration
 │   └── plot_results.py
@@ -23,9 +28,9 @@ rl-zoo-from-scratch/
 │   ├── prioritised_q_learning.py  # PER
 │   └── plot_results.py
 ├── policy_gradient/
-│   ├── reinforce.py            # REINFORCE w/ baseline (LunarLander-v2)
-│   ├── actor_critic.py         # Online Actor-Critic (LunarLander-v2)
-│   ├── ppo.py                  # PPO + GAE (LunarLander-v2)
+│   ├── reinforce.py            # REINFORCE w/ baseline (LunarLander-v3)
+│   ├── actor_critic.py         # Online Actor-Critic (LunarLander-v3)
+│   ├── ppo.py                  # PPO + GAE (LunarLander-v3)
 │   └── plot_results.py
 └── continuous_control/
     ├── ddpg.py                 # DDPG (HalfCheetah-v4)
@@ -42,7 +47,7 @@ rl-zoo-from-scratch/
 | `dynamic_programming/` | `Taxi-v3` | Tabular, model-based |
 | `prediction/` | `Taxi-v3` | Tabular, model-free |
 | `control/` | `Taxi-v3` | Tabular, model-free |
-| `policy_gradient/` | `LunarLander-v2` | Discrete actions, neural net |
+| `policy_gradient/` | `LunarLander-v3` | Discrete actions, neural net |
 | `continuous_control/` | `HalfCheetah-v4` | Continuous actions, neural net |
 
 ---
@@ -140,12 +145,22 @@ watch(model, episodes=5)
 
 ## Results
 
-Comparison plots are saved as `.png` files inside each folder after running `plot_results.py`.
+### Prediction — Taxi-v3
 
-**DP — Taxi-v3**
-Ground truth: `V(328) = 1.62`, `mean V = 2.47`, `max Q = 20.0`
+Evaluated under a random policy. The 0% completion rate is expected — a random agent almost never solves Taxi-v3, but the value estimates are still valid and comparable against the DP ground truth (V = −52.815). TD methods halve the per-state estimation error compared to Monte Carlo (≈20 vs ≈38), and increasing λ toward 1.0 further reduces error by blending in more multi-step returns.
 
-**Control — Taxi-v3**
+![Prediction results](assets/prediction_results.png)
+
+| Algorithm | Mean \|V_estimated − V_true\| |
+|---|---|
+| TD(λ=0.9) | 19.852 |
+| TD(0) | 19.968 |
+| Monte Carlo | 38.156 |
+
+---
+
+### Control — Taxi-v3
+
 | Algorithm | Eval reward |
 |---|---|
 | Q-learning | 7.96 ± 2.57 |
@@ -154,20 +169,41 @@ Ground truth: `V(328) = 1.62`, `mean V = 2.47`, `max Q = 20.0`
 | SARSA | — |
 | MC Control | — |
 
-**Policy Gradient — LunarLander-v2** *(solved = mean reward ≥ 200)*
+---
+
+### Policy Gradient — LunarLander-v3
+
+Solved threshold = mean reward ≥ 200 over 100 episodes. All methods trained for 3000 episodes.
+
+PPO is the only method that approaches the solve threshold. REINFORCE with baseline outperforms plain REINFORCE as expected — subtracting a state-dependent baseline reduces gradient variance without biasing the update.
+
+Actor-Critic underperforms REINFORCE+b despite using a learned critic. This is a known failure mode of online TD(0) Actor-Critic: the critic and actor chase each other early in training — the actor shifts the policy before the critic has reliable value estimates, producing noisy advantages that destabilise both networks. Without experience replay or GAE, the critic never gets a stable regression target. PPO addresses this through clipped updates, minibatch replay, and Generalised Advantage Estimation.
+
+![Policy gradient results](assets/policy_gradient_results.png)
+
 | Algorithm | Eval reward |
 |---|---|
-| PPO | — |
-| Actor-Critic | — |
-| REINFORCE w/ baseline | — |
-| REINFORCE | — |
+| PPO | 188.2 |
+| REINFORCE w/ baseline | −570.2 |
+| Actor-Critic | −584.5 |
+| REINFORCE | −785.3 |
 
-**Continuous Control — HalfCheetah-v4**
+**PPO agent — LunarLander-v3:**
+
+<video src="assets/lunarlander_ppo.mov" controls width="640"></video>
+
+---
+
+### Continuous Control — HalfCheetah-v4
+
 | Algorithm | Eval reward |
 |---|---|
 | SAC | — |
 | DDPG | — |
 
+**SAC agent — HalfCheetah-v4:**
+
+<video src="assets/sac_halfcheetah.mov" controls width="640"></video>
 
 ---
 

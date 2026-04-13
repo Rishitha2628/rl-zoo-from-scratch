@@ -44,7 +44,11 @@ def td_lambda_prediction(
         done     = False
         e        = np.zeros(N_STATES)   # reset traces every episode
 
-        while not done:
+        max_steps = 5000
+        step = 0
+
+        while not done and step < max_steps:
+            step += 1
             action                          = policy[state]
             next_state, reward, done, _, _  = env.step(action)
 

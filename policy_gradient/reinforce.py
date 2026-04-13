@@ -139,7 +139,7 @@ def evaluate(policy, env, episodes=100):
 # entry point 
 
 def run_agent():
-    env = gym.make("LunarLander-v2")
+    env = gym.make("LunarLander-v3")
     np.random.seed(42)
     torch.manual_seed(42)
 
@@ -198,7 +198,7 @@ def load_policy(path="reinforce_lunarlander.pt"):
 
 def watch(policy, episodes=3):
     # separate env with render_mode so training env stays unaffected
-    env_render = gym.make("LunarLander-v2", render_mode="human")
+    env_render = gym.make("LunarLander-v3", render_mode="human")
     device     = next(policy.parameters()).device
 
     policy.eval()

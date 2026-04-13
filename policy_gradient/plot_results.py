@@ -10,11 +10,11 @@ from PPO          import ppo, evaluate as evaluate_ppo, to_tensor
 
 # setup 
 
-env = gym.make("LunarLander-v2")
+env = gym.make("LunarLander-v3")
 np.random.seed(42)
 torch.manual_seed(42)
 
-SOLVE_THRESHOLD = 200   # LunarLander-v2 considered solved above this
+SOLVE_THRESHOLD = 200   # LunarLander-v3 considered solved above this
 
 
 # train all methods 
@@ -42,7 +42,7 @@ env.close()
 
 def collect_returns(action_fn, n=200):
     """Roll out n episodes using a callable action_fn(obs) -> int."""
-    e       = gym.make("LunarLander-v2")
+    e       = gym.make("LunarLander-v3")
     rewards = []
     for _ in range(n):
         obs, _ = e.reset()
@@ -77,7 +77,7 @@ with torch.no_grad():
 #    BR – eval return distributions (200-episode histogram per method)
 
 fig, axes = plt.subplots(2, 2, figsize=(13, 9))
-fig.suptitle("Policy Gradient Methods — LunarLander-v2", fontsize=13, fontweight="bold")
+fig.suptitle("Policy Gradient Methods — LunarLander-v3", fontsize=13, fontweight="bold")
 
 colours = {
     "REINFORCE+b":  "steelblue",
@@ -154,6 +154,4 @@ ax.set_title("Eval return distributions (200 episodes)")
 ax.legend(fontsize=7)
 
 plt.tight_layout()
-plt.savefig("policy_gradient_comparison.png", dpi=150)
-plt.close()
-print("\nSaved policy_gradient_comparison.png")
+plt.show()

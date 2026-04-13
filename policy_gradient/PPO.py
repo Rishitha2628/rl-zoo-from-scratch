@@ -250,8 +250,8 @@ def load_model(path="ppo_lunarlander.pt"):
 
 # render visualisation 
 
-def watch(model, episodes=3):
-    env_render = gym.make("LunarLander-v2", render_mode="human")
+def watch(model, episodes=50):
+    env_render = gym.make("LunarLander-v3", render_mode="human")
     device     = next(model.parameters()).device
 
     model.eval()
@@ -276,7 +276,7 @@ def watch(model, episodes=3):
 # entry point 
 
 def run_agent():
-    env = gym.make("LunarLander-v2")
+    env = gym.make("LunarLander-v3")
     np.random.seed(42)
     torch.manual_seed(42)
 
@@ -289,7 +289,7 @@ def run_agent():
     save_model(model)
     env.close()
 
-    watch(model, episodes=3)
+    watch(model, episodes=50                                                                                                                                          )
 
 
 if __name__ == "__main__":
