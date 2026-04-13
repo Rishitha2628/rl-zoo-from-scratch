@@ -151,7 +151,8 @@ watch(model, episodes=5)
 
 Evaluated under a random policy. The 0% completion rate is expected — a random agent almost never solves Taxi-v3, but the value estimates are still valid and comparable against the DP ground truth (V = −52.815). TD methods halve the per-state estimation error compared to Monte Carlo (≈20 vs ≈38), and increasing λ toward 1.0 further reduces error by blending in more multi-step returns.
 
-![Prediction results](assets/prediction_results.png)
+<img width="1284" height="894" alt="prediction_results" src="https://github.com/user-attachments/assets/74ad0fa7-3f60-4cc5-a3cd-04504a69c798" />
+
 
 | Algorithm | Mean \|V_estimated − V_true\| |
 |---|---|
@@ -181,7 +182,8 @@ PPO is the only method that approaches the solve threshold. REINFORCE with basel
 
 Actor-Critic underperforms REINFORCE+b despite using a learned critic. This is a known failure mode of online TD(0) Actor-Critic: the critic and actor chase each other early in training — the actor shifts the policy before the critic has reliable value estimates, producing noisy advantages that destabilise both networks. Without experience replay or GAE, the critic never gets a stable regression target. PPO addresses this through clipped updates, minibatch replay, and Generalised Advantage Estimation.
 
-![Policy gradient results](assets/policy_gradient_results.png)
+<img width="1290" height="903" alt="policy_gradient_results" src="https://github.com/user-attachments/assets/c31e7174-f151-4d86-8ada-14e57a7bb67c" />
+
 
 | Algorithm | Eval reward |
 |---|---|
@@ -207,8 +209,8 @@ https://github.com/user-attachments/assets/beaca64a-2c83-4fa8-8a64-5ad4de4b869e
 
 | Algorithm | Eval reward |
 |---|---|
-| SAC | — |
-| DDPG | — |
+| SAC | 10562 |
+| DDPG | 9876 |
 
 **SAC agent — HalfCheetah-v4:**
 
