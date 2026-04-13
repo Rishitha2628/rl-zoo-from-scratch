@@ -1,7 +1,5 @@
 
 
-https://github.com/user-attachments/assets/ca64f27e-cd68-406d-acbc-2f1f32f2e568
-
 # rl-zoo-from-scratch
 
 A clean, readable implementation of core reinforcement learning algorithms in Python using [Gymnasium](https://gymnasium.farama.org/). Built as a learning reference — every file is self-contained, every design choice is commented with *why*, not just *what*.
@@ -197,7 +195,9 @@ Actor-Critic underperforms REINFORCE+b despite using a learned critic. This is a
 <video src="assets/lunarlander_ppo.mov" controls width="640"></video>
 
 
-https://github.com/user-attachments/assets/412c2af5-9d5c-433b-9961-de8200ac5898
+https://github.com/user-attachments/assets/beaca64a-2c83-4fa8-8a64-5ad4de4b869e
+
+
 
 
 
