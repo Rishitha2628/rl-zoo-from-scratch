@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/ca64f27e-cd68-406d-acbc-2f1f32f2e568
+
 # rl-zoo-from-scratch
 
 A clean, readable implementation of core reinforcement learning algorithms in Python using [Gymnasium](https://gymnasium.farama.org/). Built as a learning reference — every file is self-contained, every design choice is commented with *why*, not just *what*.
@@ -192,6 +196,11 @@ Actor-Critic underperforms REINFORCE+b despite using a learned critic. This is a
 
 <video src="assets/lunarlander_ppo.mov" controls width="640"></video>
 
+
+https://github.com/user-attachments/assets/412c2af5-9d5c-433b-9961-de8200ac5898
+
+
+
 ---
 
 ### Continuous Control — HalfCheetah-v4
@@ -204,6 +213,12 @@ Actor-Critic underperforms REINFORCE+b despite using a learned critic. This is a
 **SAC agent — HalfCheetah-v4:**
 
 <video src="assets/sac_halfcheetah.mov" controls width="640"></video>
+
+
+https://github.com/user-attachments/assets/ec3fc7af-98ab-49c1-b3e8-01d24533e98b
+
+
+
 
 ---
 
